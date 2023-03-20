@@ -8,7 +8,7 @@ Neo4j database.
 A sample XML file called `Q9Y261.xml` is located in the `data/uniprot` directory.
 The XML contains information about proteins, associated genes 
 and other biological entities. The root element of the XML 
-is `uniprot`. Each `uniprot` element contains a `entry` element. 
+is `uniprot`. Each `uniprot` element contains an`entry` element. 
 Each `entry` element contains various elements such as 
 `protein`, `gene`, `organism` and `reference`. 
 
@@ -33,7 +33,7 @@ The main tools used for this solution were:
 data processing with built-in modules for SQL, streaming, 
 machine learning, and graph processing.
 
-* **Orchestration**: Apache Airflow platform to programmatically author, schedule, and 
+* **Orchestration**: Apache Airflow platform to programmatically author, schedule and 
 monitor workflows.
 
 * **Storage**: Neo4J is the world’s leading Graph Database. It is a high performance 
@@ -51,8 +51,8 @@ in any environment.
 
 A DAG in Airflow (`ingest_uniprot_protein_data`) is responsible for orchestrating the spark jobs that
 read all XML files in `data/uniprot` and write them into the Neo4J instance.
-Each XML file in source folder should contain information about a distinct protein
-and the name of the file should be the reference name of such protein.
+Each XML file in source folder should contain information about a distinct protein.
+The file should be named after a protein's name.
 In order to ingest data about any new protein into Neo4J, the only necessary
 step is to create a new XML file in the source folder.
 
@@ -64,8 +64,7 @@ in parallel whenever possible (respecting dependencies).
 
 ### How to scale
 
-The current architecture uses only one spark worker. In case  
-this single worker no longer supports the current data processing 
+The current architecture uses only one spark worker. In case this single worker no longer supports the current data processing 
 requirements, new spark workers could be added anytime or a managed
 spark cluster solution could be explored.
 
