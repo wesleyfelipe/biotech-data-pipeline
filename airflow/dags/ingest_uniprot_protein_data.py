@@ -16,13 +16,13 @@ def create_task(entity_name):
     return SparkSubmitOperator(
         conn_id="spark_default",
         task_id=f"ingest_{entity_name}",
-        application=f"{SPARK_JOBS_FOLDER}/ingest_unitprot_data.py",
-        application_args=[entity_name, "/data/unitprot/", neo4j_url, neo4j_user, neo4j_pass],
+        application=f"{SPARK_JOBS_FOLDER}/ingest_uniprot_data.py",
+        application_args=[entity_name, "/data/uniprot/", neo4j_url, neo4j_user, neo4j_pass],
         jars=SPARK_JAR_DEPENDENCIES,
     )
 
 with DAG(
-        dag_id="ingest_unitprot_protein_data",
+        dag_id="ingest_uniprot_protein_data",
         start_date=datetime.datetime(2023, 3, 1),
         schedule="@daily",
         catchup=False,
